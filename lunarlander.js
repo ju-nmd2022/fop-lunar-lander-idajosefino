@@ -31,10 +31,18 @@ fill(255, 0, 0);
 ellipse(450, 470, 60, 60);
 rect(400, 470, 50, 70);
 rect(450, 470, 50, 50);
-rect(445, 425, 10, 10); //rotate this
+push();
+translate(450, 425);
+rotate(0.8);
+rect(0, 0, 10, 10);
+pop();
 //building 2 (pole)
 rect(500, 400, 3, 120);
-rect(499, 394, 5, 5); //rotate this
+push();
+translate(501.5, 390);
+rotate(0.8);
+rect(0, 0, 5, 5);
+pop();
 //building 4 (pink)
 fill(255, 0, 255);
 rect(575, 400, 50, 120);
@@ -51,24 +59,59 @@ ellipse(695, 497, 100, 90);
 rect(614, 492, 170, 50);
 //building 6
 rect(782, 360, 3, 180);
-rect(780, 359, 7, 7); //rotate this
+push();
+translate(783.5, 345);
+rotate(0.8);
+rect(0, 0, 7, 7); //rotate this
+
+let x = 20;
+let y = 50;
+let rotation = 0;
+let speed = 1;
+
+x = x + speed;
+
+if (keyIsDown(40)) {
+    speed = 5;
+}   else {
+    speed = 0;
+}
+pop();
+
+falcon(x, y, rotation);
+}
 
 //falcon
-push();
-noStroke();
-fill(215, 213, 215);
-ellipse(180, 140, 80, 80);
-pop();
-stroke(0, 0, 0);
-strokeWeight(2);
-fill(215,213,215);
-rect(172, 87, 16, 50);
-ellipse(180, 140, 20, 20);
-fill(0,0,0);
-ellipse(193, 157, 5, 5);
-ellipse(180, 160, 5, 5);
-ellipse(168, 157, 5, 5);
-ellipse(196, 167, 5, 5);
-ellipse(180, 170, 5, 5);
-ellipse(164, 167, 5, 5);
-}
+function falcon(x, y, rotation) {
+    push();
+    translate(x, y);
+    rotate(rotation);
+    noStroke();
+    fill(215, 213, 215);
+    ellipse(180, 140, 80, 80);
+    stroke(0, 0, 0);
+    strokeWeight(2);
+    fill(215,213,215);
+    beginShape();
+    vertex(180, 140);
+    vertex(220, 130);
+    vertex(220, 150);
+    vertex(180, 140);
+    endShape();
+    beginShape();
+    vertex(180, 140);
+    vertex(140, 130);
+    vertex(140, 150);
+    vertex(180, 140);
+    endShape();
+    rect(172, 87, 16, 50);
+    ellipse(180, 140, 20, 20);
+    fill(0,0,0);
+    ellipse(193, 157, 5, 5);
+    ellipse(180, 160, 5, 5);
+    ellipse(168, 157, 5, 5);
+    ellipse(196, 167, 5, 5);
+    ellipse(180, 170, 5, 5);
+    ellipse(164, 167, 5, 5);
+    pop();
+    }
