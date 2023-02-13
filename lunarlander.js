@@ -1,29 +1,30 @@
-// //starry background (garrit shaap video link: https://pixelkind.github.io/foundationsofprogramming//programming/15-07-example)
-// let starX = [];
-// let starY = [];
+//starry background (garrit shaap video link: https://pixelkind.github.io/foundationsofprogramming//programming/15-07-example)
 
-// let starAlpha = [];
+let starX = [];
+let starY = [];
 
-// for (let i = 0; i < 200; i++) {
-//     const x = Math.floor(Math.random() * width);
-//     const y = Math.floor(Math.random() * height);
-//     const alpha = Math.random();
+let starAlpha = [];
 
-//     starX.push(x);
-//     starY.push(y);
-//     starAlpha.push(alpha);
-// }
+for (let i = 0; i < 200; i++) {
+    const x = Math.floor(Math.random() * width);
+    const y = Math.floor(Math.random() * height);
+    const alpha = Math.random();
 
-// function draw() {
-//     noStroke();
-//     background(0, 0, 0);
+    starX.push(x);
+    starY.push(y);
+    starAlpha.push(alpha);
+}
 
-//     for (let index in starX) {
-//         fill(255, 255, 255, Math.abs(Math.sin(starAlpha[index])) * 255);
-//         ellipse(starX[index], starY[index], 2);
-//         starAlpha[index] = starAlpha[index] + 0.02;
-//     }
-// }
+function draw() {
+    noStroke();
+    background(0, 0, 0);
+
+    for (let index in starX) {
+        fill(255, 255, 255, Math.abs(Math.sin(starAlpha[index])) * 255);
+        ellipse(starX[index], starY[index], 2);
+        starAlpha[index] = starAlpha[index] + 0.02;
+    }
+}
 
 //ground
 push();
@@ -76,9 +77,13 @@ push();
 stroke(0, 0, 0);
 strokeWeight(2);
 fill(215,213,215);
+rect(172, 87, 16, 50);
 ellipse(180, 140, 20, 20);
 pop();
 fill(0,0,0);
 ellipse(193, 157, 5, 5);
 ellipse(180, 160, 5, 5);
 ellipse(168, 157, 5, 5);
+ellipse(196, 167, 5, 5);
+ellipse(180, 170, 5, 5);
+ellipse(164, 167, 5, 5);
