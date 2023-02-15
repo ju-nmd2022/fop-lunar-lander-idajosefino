@@ -62,31 +62,80 @@ rect(782, 360, 3, 180);
 push();
 translate(783.5, 345);
 rotate(0.8);
-rect(0, 0, 7, 7); //rotate this
+rect(0, 0, 7, 7);
 
 let x = 20;
 let y = 50;
-let rotation = 0;
-let speed = 1;
-
-x = x + speed;
+let speed = 2;
 
 if (keyIsDown(40)) {
-    speed = 5;
+    speed = 2;
 }   else {
     speed = 0;
 }
 pop();
 
-falcon(x, y, rotation);
+falcon(x, y, speed);
 }
 
 //falcon
-function falcon(x, y, rotation) {
+function falcon(x, y, speed) {
+        //engine fire when pressing key to land it
+        push();
+        stroke(165, 242, 252);
+        strokeWeight(2);
+        fill(165, 242, 252);
+        beginShape();
+        vertex(170.5, 200);
+        vertex(170.5, 240);
+        vertex(175, 240);
+        vertex(175, 235);
+        vertex(182, 235);
+        vertex(182, 250);
+        vertex(189, 250);
+        vertex(189, 240);
+        vertex(196, 240);
+        vertex(196, 245);
+        vertex(203, 245);
+        vertex(203, 240);
+        vertex(210, 240);
+        vertex(210, 255);
+        vertex(217, 255);
+        vertex(217, 240);
+        vertex(224, 240);
+        vertex(224, 247);
+        vertex(229.5, 247);
+        vertex(229.5, 200);   
+        endShape();
+        ellipse(173.3, 237, 6, 15);
+        ellipse(185.5, 250, 7, 15);
+        ellipse(199.5, 245, 7, 15);
+        ellipse(213.5, 253, 7, 15);
+        ellipse(226.8, 245, 6, 15);
+        ellipse(185.5, 273, 5, 10);
+        ellipse(213.5, 280, 5, 20);
+        ellipse(227.5, 264, 4, 7);
+        pop();
+    push();
+    noStroke();
+    fill(215, 213, 215);
+    beginShape();
+    vertex(209, 174);
+    vertex(209, 126);
+    vertex(215, 126);
+    vertex(236, 174);
+    endShape(); 
+    beginShape();
+    vertex(191, 174);
+    vertex(191, 126);
+    vertex(185, 126);
+    vertex(164, 174);
+    endShape(); 
+    pop();
     push();
     translate(x, y);
-    rotate(rotation);
-    noStroke();
+    stroke(0, 0, 0);
+    strokeWeight(2);
     fill(215, 213, 215);
     ellipse(180, 140, 80, 80);
     stroke(0, 0, 0);
@@ -113,5 +162,21 @@ function falcon(x, y, rotation) {
     ellipse(196, 167, 5, 5);
     ellipse(180, 170, 5, 5);
     ellipse(164, 167, 5, 5);
+    pop();   
+    push();
+    stroke(0, 0, 0);
+    strokeWeight(2);
+    fill(215, 213, 215);
+    beginShape();
+    vertex(215, 173);
+    vertex(230, 165);
+    vertex(230, 156);
+    vertex(239, 156);
+    vertex(239, 171);
+    vertex(215, 180);
+    vertex(215, 173);
+    endShape();
     pop();
     }
+
+    
