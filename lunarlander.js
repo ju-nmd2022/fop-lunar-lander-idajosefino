@@ -1,6 +1,7 @@
 let x = 0;
 let y = 0;
 let speed = 0;
+let velocity = 0;
 
 let starX = [];
 let starY = [];
@@ -27,7 +28,8 @@ function draw() {
 //ground
 noStroke();
 fill(210,170,109);
-rect(0, 520, 1080);
+rect(0, 600, 700);
+
 //death star
 push();
 fill(102, 102, 102);
@@ -39,9 +41,13 @@ stroke(0,0,0);
 ellipse(490, 132, 25, 25);
 rect(460, 155, 80, 0.1);
 pop();
+
 //mos eisley buildings
+push();
+translate(0, 80);
 stroke(166, 120, 51);
 strokeWeight(3);
+
 //building 1
 fill(204, 158, 89);
 ellipse(450, 470, 60, 60);
@@ -53,6 +59,7 @@ translate(450, 425);
 rotate(0.8);
 rect(0, 0, 10, 10);
 pop();
+
 //building 2 (pole)
 rect(500, 400, 3, 120);
 push();
@@ -60,6 +67,7 @@ translate(501.5, 390);
 rotate(0.8);
 rect(0, 0, 5, 5);
 pop();
+
 //building 4 (tower)
 fill(204, 158, 89);
 rect(575, 400, 50, 120);
@@ -82,6 +90,7 @@ vertex(561.5, 390);
 vertex(638, 390);
 vertex(625, 402);
 endShape();
+
 //building 3
 ellipse(547, 465, 60, 60);
 rect(503, 470, 90, 60);
@@ -89,13 +98,16 @@ rect(510, 465, 75, 6);
 ellipse(520, 517, 10, 25);
 ellipse(545, 517, 10, 25);
 ellipse(570, 517, 10, 25);
+
 //tower behind building 5
 fill(204, 158, 89);
 rect(741, 455, 20, 40);
+
 //building 5
 rect(693, 425, 3, 30);
 ellipse(695, 497, 100, 90);
 rect(614, 492, 170, 50);
+
 //building 6
 rect(782, 360, 3, 180);
 push();
@@ -103,10 +115,15 @@ translate(783.5, 345);
 rotate(0.8);
 rect(0, 0, 7, 7);
 pop();
+pop();
 
+//falcon movement
 falcon(x, y);
+fire();
 
   x = x + speed;
+
+  y = y + velocity;
 
   if (keyIsDown(68)) {
     speed = 5;
@@ -116,39 +133,47 @@ falcon(x, y);
     speed = 0;
   }
 
-// //engine fire when pressing key to land it
-//   push();
-//   stroke(165, 242, 252);
-//   strokeWeight(2);
-//   fill(165, 242, 252);
-//   beginShape();
-//   vertex(170.5, 200);
-//   vertex(170.5, 240);
-//   vertex(175, 240);
-//   vertex(175, 235);
-//   vertex(182, 235);
-//   vertex(182, 250);
-//   vertex(189, 250);
-//   vertex(189, 240);
-//   vertex(196, 240);
-//   vertex(196, 245);
-//   vertex(203, 245);
-//   vertex(203, 240);
-//   vertex(210, 240);
-//   vertex(210, 255);
-//   vertex(217, 255);
-//   vertex(217, 240);
-//   vertex(224, 240);
-//   vertex(224, 247);
-//   vertex(229.5, 247);
-//   vertex(229.5, 200);   
-//   endShape();
-//   ellipse(173.3, 237, 6, 15);
-//   ellipse(185.5, 250, 7, 15);
-//   ellipse(199.5, 245, 7, 15);
-//   ellipse(213.5, 253, 7, 15);
-//   ellipse(226.8, 245, 6, 15);
-//   pop();
+  if (keyIsDown(32)) {
+    velocity = 5;
+  } else {
+    velocity = 0;
+  }
+
+  //engine fire to appear when pressing key to land it
+  function fire() {
+  push();
+  stroke(165, 242, 252);
+  strokeWeight(2);
+  fill(165, 242, 252);
+  beginShape();
+  vertex(170.5, 200);
+  vertex(170.5, 240);
+  vertex(175, 240);
+  vertex(175, 235);
+  vertex(182, 235);
+  vertex(182, 250);
+  vertex(189, 250);
+  vertex(189, 240);
+  vertex(196, 240);
+  vertex(196, 245);
+  vertex(203, 245);
+  vertex(203, 240);
+  vertex(210, 240);
+  vertex(210, 255);
+  vertex(217, 255);
+  vertex(217, 240);
+  vertex(224, 240);
+  vertex(224, 247);
+  vertex(229.5, 247);
+  vertex(229.5, 200);   
+  endShape();
+  ellipse(173.3, 237, 6, 15);
+  ellipse(185.5, 250, 7, 15);
+  ellipse(199.5, 245, 7, 15);
+  ellipse(213.5, 253, 7, 15);
+  ellipse(226.8, 245, 6, 15);
+  pop();
+  }
 
 //falcon
 function falcon(x, y) {
