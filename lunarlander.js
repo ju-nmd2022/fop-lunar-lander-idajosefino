@@ -1,12 +1,18 @@
 let x = 0;
 let y = 0;
-let speed = 0;
-let velocity = 0;
+let speed = 1;
+let velocity = 0.2;
+let isGameActive = true;
 
 let starX = [];
 let starY = [];
 let starAlpha = [];
 
+function setup() {
+  createCanvas(700, 700);
+}
+
+//starry sky
 for (let i = 0; i < 400; i++) {
     const x = Math.floor(Math.random() * width);
     const y = Math.floor(Math.random() * height);
@@ -16,17 +22,120 @@ for (let i = 0; i < 400; i++) {
     starAlpha.push(alpha);
 }
 
-function draw() {
-    noStroke();
-    background(0, 0, 0);
-    for (let index in starX) {
-        fill(255, 255, 255, Math.abs(Math.sin(starAlpha[index])) * 255);
-        ellipse(starX[index], starY[index], 2);
-        starAlpha[index] = starAlpha[index] + 0.02;
-    }
+//engine fire to appear when pressing key to land it
+function engine() {
+  push();
+  translate(-20, -50);
+  stroke(165, 242, 252);
+  strokeWeight(2);
+  fill(165, 242, 252);
+  beginShape();
+  vertex(170.5, 200);
+  vertex(170.5, 240);
+  vertex(175, 240);
+  vertex(175, 235);
+  vertex(182, 235);
+  vertex(182, 250);
+  vertex(189, 250);
+  vertex(189, 240);
+  vertex(196, 240);
+  vertex(196, 245);
+  vertex(203, 245);
+  vertex(203, 240);
+  vertex(210, 240);
+  vertex(210, 255);
+  vertex(217, 255);
+  vertex(217, 240);
+  vertex(224, 240);
+  vertex(224, 247);
+  vertex(229.5, 247);
+  vertex(229.5, 200);   
+  endShape();
+  ellipse(173.3, 237, 6, 15);
+  ellipse(185.5, 250, 7, 15);
+  ellipse(199.5, 245, 7, 15);
+  ellipse(213.5, 253, 7, 15);
+  ellipse(226.8, 245, 6, 15);
+  pop();
+  }
 
+//falcon
+function falcon(x, y) {
+  push();
+  translate (x, y);
+  noStroke();
+  fill(215, 213, 215);
+
+//wing right
+beginShape();
+vertex(189, 121);
+vertex(189, 79);
+vertex(193, 79);
+vertex(214, 121);
+endShape(); 
+
+//wing left
+beginShape();
+vertex(171, 121);
+vertex(171, 79);
+vertex(167, 79);
+vertex(145, 121);
+endShape(); 
+
+//body of falcon
+stroke(0, 0, 0);
+strokeWeight(2);
+fill(215, 213, 215);
+ellipse(180, 140, 80, 80);
+
+//right added side to falcon
+beginShape();
+vertex(180, 140);
+vertex(220, 130);
+vertex(220, 150);
+vertex(180, 140);
+endShape();
+
+//left added side to falcon
+beginShape();
+vertex(180, 140);
+vertex(140, 130);
+vertex(140, 150);
+vertex(180, 140);
+endShape();
+
+//added shapes on top of falcon
+rect(172, 87, 16, 50);
+ellipse(180, 140, 20, 20);
+
+//black dots
+fill(0,0,0);
+ellipse(193, 157, 5, 5);
+ellipse(180, 160, 5, 5);
+ellipse(168, 157, 5, 5);
+ellipse(196, 167, 5, 5);
+ellipse(180, 170, 5, 5);
+ellipse(164, 167, 5, 5);
+
+//added weird thing on top
+stroke(0, 0, 0);
+strokeWeight(2);
+fill(215, 213, 215);
+beginShape();
+vertex(197, 124);
+vertex(211, 118);
+vertex(211, 111);
+vertex(219, 111);
+vertex(219, 151);
+vertex(219, 124);
+vertex(201, 129);
+vertex(197, 124);
+endShape();
+pop();
+}
+
+function scenery() {
 //ground
-noStroke();
 fill(210,170,109);
 rect(0, 600, 700);
 
@@ -38,6 +147,7 @@ pop();
 push();
 fill(102, 105, 102);
 stroke(0,0,0);
+strokeWeight(3);
 ellipse(490, 132, 25, 25);
 rect(460, 155, 80, 0.1);
 pop();
@@ -115,139 +225,35 @@ translate(783.5, 345);
 rotate(0.8);
 rect(0, 0, 7, 7);
 pop();
-pop();
+}
+
+function draw() {
+    noStroke();
+    background(0, 0, 0);
+    for (let index in starX) {
+        fill(255, 255, 255, Math.abs(Math.sin(starAlpha[index])) * 255);
+        ellipse(starX[index], starY[index], 2);
+        starAlpha[index] = starAlpha[index] + 0.02;
+    }
+
+  scenery();
+  engine();
+  falcon(x, y);
+  
+  y = y + velocity;
+  velocity = velocity + y;
 
 //falcon movement
-falcon(x, y);
-fire();
-
-  x = x + speed;
-
+if (isGameActive) {
   y = y + velocity;
+  velocity = velocity + 1;
+}
 
-  if (keyIsDown(68)) {
-    speed = 5;
-  } else if (keyIsDown(65)) {
-    speed = -5;
-  } else {
-    speed = 0;
-  }
+if (y > 370) {
+  isGameActive = false;
+}
 
-  if (keyIsDown(32)) {
-    velocity = 5;
-  } else {
-    velocity = 0;
-  }
-
-  //engine fire to appear when pressing key to land it
-  function fire() {
-  push();
-  stroke(165, 242, 252);
-  strokeWeight(2);
-  fill(165, 242, 252);
-  beginShape();
-  vertex(170.5, 200);
-  vertex(170.5, 240);
-  vertex(175, 240);
-  vertex(175, 235);
-  vertex(182, 235);
-  vertex(182, 250);
-  vertex(189, 250);
-  vertex(189, 240);
-  vertex(196, 240);
-  vertex(196, 245);
-  vertex(203, 245);
-  vertex(203, 240);
-  vertex(210, 240);
-  vertex(210, 255);
-  vertex(217, 255);
-  vertex(217, 240);
-  vertex(224, 240);
-  vertex(224, 247);
-  vertex(229.5, 247);
-  vertex(229.5, 200);   
-  endShape();
-  ellipse(173.3, 237, 6, 15);
-  ellipse(185.5, 250, 7, 15);
-  ellipse(199.5, 245, 7, 15);
-  ellipse(213.5, 253, 7, 15);
-  ellipse(226.8, 245, 6, 15);
-  pop();
-  }
-
-//falcon
-function falcon(x, y) {
-translate(x, y);
-noStroke();
-fill(215, 213, 215);
-
-//wing right
-beginShape();
-vertex(189, 121);
-vertex(189, 79);
-vertex(193, 79);
-vertex(214, 121);
-endShape(); 
-
-//wing left
-beginShape();
-vertex(171, 121);
-vertex(171, 79);
-vertex(167, 79);
-vertex(145, 121);
-endShape(); 
-
-//body of falcon
-stroke(0, 0, 0);
-strokeWeight(2);
-fill(215, 213, 215);
-ellipse(180, 140, 80, 80);
-
-//right added side to falcon
-// stroke(0, 0, 0);
-// strokeWeight(2);
-// fill(215,213,215);
-beginShape();
-vertex(180, 140);
-vertex(220, 130);
-vertex(220, 150);
-vertex(180, 140);
-endShape();
-
-//left added side to falcon
-beginShape();
-vertex(180, 140);
-vertex(140, 130);
-vertex(140, 150);
-vertex(180, 140);
-endShape();
-
-//added shapes on top of falcon
-rect(172, 87, 16, 50);
-ellipse(180, 140, 20, 20);
-
-//black dots
-fill(0,0,0);
-ellipse(193, 157, 5, 5);
-ellipse(180, 160, 5, 5);
-ellipse(168, 157, 5, 5);
-ellipse(196, 167, 5, 5);
-ellipse(180, 170, 5, 5);
-ellipse(164, 167, 5, 5);
-
-//added weird thing on top
-stroke(0, 0, 0);
-strokeWeight(2);
-fill(215, 213, 215);
-beginShape();
-vertex(197, 124);
-vertex(211, 118);
-vertex(211, 111);
-vertex(219, 111);
-vertex(219, 151);
-vertex(219, 124);
-vertex(201, 129);
-vertex(197, 124);
-endShape();
-  }
+if (keyIsPressed(35)) {
+  velocity = velocity + 1;
+}
 }
