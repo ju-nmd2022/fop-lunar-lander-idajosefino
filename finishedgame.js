@@ -32,17 +32,21 @@ function draw() {
 }
 
 function restartButton(x, y, w, h) {
-    fill(255, 0, 0);
+    fill(255, 232, 31);
     rect(x, y, w, h);
 
-    fill(255, 255, 255);
+    fill(0, 0, 0);
     text("Restart game", x + w / 3, y + h / 1.7);
 }
 
 function menuButton(x, y, w, h) {
-    fill(255, 0, 0);
+    fill(255, 232, 31);
     rect(x, y, w, h);
 
-    fill(255, 255, 255);
+    fill(0, 0, 0);
     text("Go to menu", x + w / 2.8, y + h / 1.7);
 }  
+
+function mouseClicked() {
+    console.log("Button was clicked");
+}

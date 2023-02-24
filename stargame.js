@@ -24,7 +24,7 @@ function draw() {
         ellipse(starX[index], starY[index], 2);
         starAlpha[index] = starAlpha[index] + 0.02;
     }
-    
+
     startButton(100, 100, 200, 60);
 }
 
@@ -34,4 +34,8 @@ function startButton(x, y, w, h) {
 
     fill(0, 0, 0);
     text("Start game", x + w / 3, y + h / 1.7);
+}
+
+function mouseClicked() {
+    console.log("Button was clicked");
 }

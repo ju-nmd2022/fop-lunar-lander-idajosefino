@@ -9,7 +9,7 @@ let starY = [];
 let starAlpha = [];
 
 function setup() {
-  createCanvas(700, 700);
+  createCanvas(700, 600);
 }
 
 //starry sky
@@ -240,20 +240,19 @@ function draw() {
   engine();
   falcon(x, y);
   
-  y = y + velocity;
-  velocity = velocity + y;
+
 
 //falcon movement
 if (isGameActive) {
   y = y + velocity;
-  velocity = velocity + 1;
+  velocity = velocity + 0.1; 
 }
 
 if (y > 370) {
   isGameActive = false;
-}
+} 
 
-if (keyIsPressed(35)) {
-  velocity = velocity + 1;
+if (keyIsDown(32)) { 
+  velocity = velocity - 0.5; 
 }
 }
