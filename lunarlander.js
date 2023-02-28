@@ -1,65 +1,54 @@
+let state = "result";
+let gameTimer = 0;
+let starX = [];
+let starY = [];
+let starAlpha = [];
 let x = 0;
 let y = 0;
 let speed = 1;
 let velocity = 0.2;
 let isGameActive = true;
 
-let starX = [];
-let starY = [];
-let starAlpha = [];
-
 function setup() {
-  createCanvas(700, 600);
+  createCanvas(700, 700);
 }
 
-//starry sky
 for (let i = 0; i < 400; i++) {
-    const x = Math.floor(Math.random() * width);
-    const y = Math.floor(Math.random() * height);
-    const alpha = Math.random();
-    starX.push(x);
-    starY.push(y);
-    starAlpha.push(alpha);
+  const x = Math.floor(Math.random() * width);
+  const y = Math.floor(Math.random() * height);
+  const alpha = Math.random();
+  
+  starX.push(x);
+  starY.push(y);
+  starAlpha.push(alpha);
 }
 
-//engine fire to appear when pressing key to land it
-function engine() {
-  push();
-  translate(-20, -50);
-  stroke(165, 242, 252);
-  strokeWeight(2);
-  fill(165, 242, 252);
-  beginShape();
-  vertex(170.5, 200);
-  vertex(170.5, 240);
-  vertex(175, 240);
-  vertex(175, 235);
-  vertex(182, 235);
-  vertex(182, 250);
-  vertex(189, 250);
-  vertex(189, 240);
-  vertex(196, 240);
-  vertex(196, 245);
-  vertex(203, 245);
-  vertex(203, 240);
-  vertex(210, 240);
-  vertex(210, 255);
-  vertex(217, 255);
-  vertex(217, 240);
-  vertex(224, 240);
-  vertex(224, 247);
-  vertex(229.5, 247);
-  vertex(229.5, 200);   
-  endShape();
-  ellipse(173.3, 237, 6, 15);
-  ellipse(185.5, 250, 7, 15);
-  ellipse(199.5, 245, 7, 15);
-  ellipse(213.5, 253, 7, 15);
-  ellipse(226.8, 245, 6, 15);
-  pop();
+function startScreen() {
+    background(0, 0, 0);
+    startButton(100, 100, 200, 60);
+  
+  function startButton(x, y, w, h) {
+      fill(255, 232, 31);
+      rect(x, y, w, h);
+      stroke(0, 0, 0);
+      strokeWeight(2);
+      text("Start game", x + w / 2.7, y + h / 1.7);
+  }
   }
 
-//falcon
+  function mouseClicked() {
+    console.log("Button was clicked");
+  }
+
+  function gameScreen() {
+    noStroke();
+    background(0, 0, 0);
+      for (let index in starX) {
+          fill(255, 255, 255, Math.abs(Math.sin(starAlpha[index])) * 255);
+          ellipse(starX[index], starY[index], 2);
+          starAlpha[index] = starAlpha[index] + 0.02;
+      }
+  //falcon
 function falcon(x, y) {
   push();
   translate (x, y);
@@ -227,20 +216,8 @@ rect(0, 0, 7, 7);
 pop();
 }
 
-function draw() {
-    noStroke();
-    background(0, 0, 0);
-    for (let index in starX) {
-        fill(255, 255, 255, Math.abs(Math.sin(starAlpha[index])) * 255);
-        ellipse(starX[index], starY[index], 2);
-        starAlpha[index] = starAlpha[index] + 0.02;
-    }
-
-  scenery();
-  engine();
-  falcon(x, y);
-  
-
+scenery();
+falcon(x, y);
 
 //falcon movement
 if (isGameActive) {
@@ -255,4 +232,44 @@ if (y > 370) {
 if (keyIsDown(32)) { 
   velocity = velocity - 0.5; 
 }
+}
+
+  function resultScreen() {
+    background(0, 0, 0);
+    restartButton(100, 100, 200, 60);
+}
+
+function restartButton(x, y, w, h) {
+    fill(255, 232, 31);
+    rect(x, y, w, h);
+    stroke(0, 0, 0);
+    strokeWeight (2);
+    text("Restart game", x + w / 3, y + h / 1.7);
+}
+
+function mouseClicked() {
+    console.log("Button was clicked");
+}
+
+function draw() {
+    if (state === "start") {
+      startScreen();
+    } else if (state === "game") {
+      gameScreen();
+      gameTimer = gameTimer + 1;
+      if (gameTimer >= 300) {
+        gameTimer = 0;
+        state = "result";
+      }
+    } else if (state === "result") {
+      resultScreen();
+    }
+}
+
+function mouseClicked() {
+  if (state === "start") {
+    state = "game";
+  } else if (state === "result") {
+    state = "start";
+  }
 }
