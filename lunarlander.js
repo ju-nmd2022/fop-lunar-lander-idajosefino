@@ -6,7 +6,7 @@ let starAlpha = [];
 let x = 0;
 let y = 0;
 let speed = 1;
-let velocity = 0.2;
+let velocity = 0.3;
 let isGameActive = true;
 let mouseIsClicked = false;
 
@@ -121,6 +121,7 @@ function falcon(x, y) {
   pop();
 }
 
+//scenery
 function scenery() {
   //ground
   fill(210,170,109);
@@ -253,13 +254,6 @@ function mouseClicked() {
     state = "start";
   }
 }
-
-// function buttonClicked() {
-//   // if (mouseX > 100 && mouseX < 100 + 200 && mouseY > 100 && mouseY < 100 + 60) {
-//   //   console.log("Button is clicked");
-//   //   buttonIsClicked = true;
-//   // } 
-// }
 
 function draw() {
     if (state === "start") {
