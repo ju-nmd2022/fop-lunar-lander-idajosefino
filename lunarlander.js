@@ -8,7 +8,7 @@ let y = 0;
 let speed = 1;
 let velocity = 0.2;
 let isGameActive = true;
-let buttonIsClicked = false;
+let mouseIsClicked = false;
 
 function setup() {
   createCanvas(700, 700);
@@ -254,12 +254,12 @@ function mouseClicked() {
   }
 }
 
-function buttonClicked() {
-  if (mouseX > 100 && mouseX < 100 + 200 && mouseY > 100 && mouseY < 100 + 60) {
-    console.log("Button is clicked");
-    buttonIsClicked = true;
-  } 
-}
+// function buttonClicked() {
+//   // if (mouseX > 100 && mouseX < 100 + 200 && mouseY > 100 && mouseY < 100 + 60) {
+//   //   console.log("Button is clicked");
+//   //   buttonIsClicked = true;
+//   // } 
+// }
 
 function draw() {
     if (state === "start") {
@@ -274,4 +274,9 @@ function draw() {
     } else if (state === "result") {
       resultScreen();
     }
+
+    if (mouseIsClicked && mouseX > 100 && mouseX < 100 + 200 && mouseY > 100 && mouseY < 100 + 60) {
+      buttonIsClicked = true;
+      console.log("Mouse is clicked");
+    } 
 }
