@@ -10,6 +10,7 @@ let velocity = 0.3;
 let maxVelocity = 3;
 let isGameActive = true;
 let buttonIsClicked = false;
+let result = "";
 
 function setup() {
   createCanvas(700, 700);
@@ -40,7 +41,6 @@ function startScreen() {
       {
       if (mouseX > 100 && mouseX < 100 + 200 && mouseY > 100 && mouseY < 100 + 60) {
       buttonIsClicked = true;
-      console.log('Mouse is pressed');
       }
     }
   }
@@ -175,7 +175,7 @@ function gameScreen() {
   push();
   translate(501.5, 390);
   rotate(0.8);
-  rect(0, 0, 5, 5);
+  rect(0, 0, 5, 5); 
   pop();
     
   //building 4 (tower)
@@ -238,13 +238,15 @@ function gameScreen() {
     if ((y > 370) && (velocity >= maxVelocity) && isGameActive) {
         isGameActive = false;
         resultScreen();
-        console.log('failed');
-    } 
+        result = 'you failed, try again';
+        state = "result";
+      } 
     if ((y > 370) && (velocity < maxVelocity) && isGameActive) {
         isGameActive = false;
         resultScreen();
-        text("You won! Play again!", x + w / 4.3, y + h / 1.7);
-        console.log('succesfully landed!');
+        // restartButton.text = "You won! Play again!";
+        result = "you won! play again";
+        state = "result";
     } 
     if (keyIsDown(32)) { 
         velocity = velocity - 0.5; 
@@ -255,19 +257,17 @@ function gameScreen() {
 function resultScreen() {
     background(0, 0, 0);
     restartButton(100, 100, 200, 60);
-
+}
 function restartButton(x, y, w, h) {
     fill(255, 232, 31);
     rect(x, y, w, h);
     stroke(0, 0, 0);
     strokeWeight (2);
-    text("You lost. Try again", x + w / 4.2, y + h / 1.7);
-    { if (mouseX > 100 && mouseX < 100 + 200 && mouseY > 100 && mouseY < 100 + 60) {
+    console.log(result, "nice");
+  text(result, x + w / 4.2, y + h / 1.7); 
+  if (mouseX > 100 && mouseX < 100 + 200 && mouseY > 100 && mouseY < 100 + 60) {
       buttonIsClicked = true;
-      console.log('Mouse is pressed');
       }
-}
-}
 }
 
 function mousePressed() {
@@ -292,9 +292,8 @@ function draw() {
         if(gameTimer >= 400) 
         console.log('too slow!!!');
         gameTimer = 0;
-        state = "result";
-      } else if (state === "result") {
-      resultScreen();
-    }
-}
+        state = "result"; }
+    } else if (state === "result") {
+    resultScreen();
+  }
 }
