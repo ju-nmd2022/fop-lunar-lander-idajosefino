@@ -1,4 +1,4 @@
-let state = "result";
+let state = "start";
 let gameTimer = 0;
 let starX = [];
 let starY = [];
@@ -9,12 +9,13 @@ let speed = 1;
 let velocity = 0.3;
 let maxVelocity = 3;
 let isGameActive = true;
-let mouseIsClicked = false;
+let buttonIsClicked = false;
 
 function setup() {
   createCanvas(700, 700);
 }
 
+//stars
 for (let i = 0; i < 400; i++) {
   const x = Math.floor(Math.random() * width);
   const y = Math.floor(Math.random() * height);
@@ -36,6 +37,12 @@ function startScreen() {
       stroke(0, 0, 0);
       strokeWeight(2);
       text("Start game", x + w / 2.7, y + h / 1.7);
+      {
+      if (mouseX > 100 && mouseX < 100 + 200 && mouseY > 100 && mouseY < 100 + 60) {
+      buttonIsClicked = true;
+      console.log('Mouse is pressed');
+      }
+    }
   }
   
   isGameActive = true;
@@ -230,10 +237,13 @@ function gameScreen() {
     }
     if ((y > 370) && (velocity >= maxVelocity) && isGameActive) {
         isGameActive = false;
+        resultScreen();
         console.log('failed');
     } 
     if ((y > 370) && (velocity < maxVelocity) && isGameActive) {
         isGameActive = false;
+        resultScreen();
+        text("You won! Play again!", x + w / 4.3, y + h / 1.7);
         console.log('succesfully landed!');
     } 
     if (keyIsDown(32)) { 
@@ -245,35 +255,30 @@ function gameScreen() {
 function resultScreen() {
     background(0, 0, 0);
     restartButton(100, 100, 200, 60);
-}
 
 function restartButton(x, y, w, h) {
     fill(255, 232, 31);
     rect(x, y, w, h);
     stroke(0, 0, 0);
     strokeWeight (2);
-    text("You won! Play again!", x + w / 4.3, y + h / 1.7);
+    text("You lost. Try again", x + w / 4.2, y + h / 1.7);
+    { if (mouseX > 100 && mouseX < 100 + 200 && mouseY > 100 && mouseY < 100 + 60) {
+      buttonIsClicked = true;
+      console.log('Mouse is pressed');
+      }
+}
+}
 }
 
-//result screen if lost
-function lostScreen() {
-  background(0, 0, 0);
-  lostButton(100, 100, 200, 60);
-}
-
-function lostButton(x, y, w, h) {
-  fill(255, 232, 31);
-  rect(x, y, w, h);
-  stroke(0, 0, 0);
-  strokeWeight (2);
-  text("You lost. Try again", x + w / 4.3, y + h / 1.7);
-}
-
-function mouseClicked() {
+function mousePressed() {
   if (state === "start") {
     state = "game";
+    gameScreen();
   } else if (state === "result") {
     state = "start";
+    startScreen();
+  } else if (state === "result") {
+    resultScreen();
   }
 }
 
@@ -288,13 +293,8 @@ function draw() {
         console.log('too slow!!!');
         gameTimer = 0;
         state = "result";
-      }
-    } else if (state === "result") {
+      } else if (state === "result") {
       resultScreen();
     }
-
-    if (mouseIsClicked && mouseX > 100 && mouseX < 100 + 200 && mouseY > 100 && mouseY < 100 + 60) {
-      buttonIsClicked = true;
-      console.log('Mouse is clicked');
-    }
+}
 }
