@@ -274,8 +274,6 @@ function mouseClicked() {
     state = "game";
   } else if (state === "result") {
     state = "start";
-  } else if (state === "lost") {
-    state = "start";
   }
 }
 
@@ -289,8 +287,7 @@ function draw() {
         if(gameTimer >= 400) 
         console.log('too slow!!!');
         gameTimer = 0;
-        lostScreen();
-        // state = "result";
+        state = "result";
       }
     } else if (state === "result") {
       resultScreen();
