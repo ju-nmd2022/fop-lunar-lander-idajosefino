@@ -14,7 +14,6 @@ let result = "";
 
 function setup() {
   createCanvas(700, 700);
-}
 
 //stars
 for (let i = 0; i < 400; i++) {
@@ -26,10 +25,13 @@ for (let i = 0; i < 400; i++) {
   starY.push(y);
   starAlpha.push(alpha);
 }
+}
 
 //start screen
 function startScreen() {
     background(0, 0, 0);
+    fill(255, 255, 255);
+    text(100, 50, "Use the space key to slow the falcon down. Don't be too slow. May the force be with you.");
     startButton(100, 100, 200, 60);
   
   function startButton(x, y, w, h) {
