@@ -31,7 +31,7 @@ for (let i = 0; i < 400; i++) {
 function startScreen() {
     background(0, 0, 0);
     fill(255, 255, 255);
-    text("Use the space key to slow the falcon down. Don't be too slow. May the force be with you.", 100, 50);
+    text("Use the space key to slow the falcon down. May the force be with you.", 100, 50);
     startButton(100, 100, 200, 60);
   
   function startButton(x, y, w, h) {
